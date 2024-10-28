@@ -1,0 +1,23 @@
+groups:
+  - name: example_alerts
+    rules:
+      - alert: HighRequestRate
+        expr: sum(rate(http_requests_total[5m])) > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High request rate detected"
+          description: "The request rate is above 100 requests per minute."
+
+  - name: post_request_rules
+    rules:
+      - alert: HighPostRequestRate
+        expr: sum(rate(post_request_total[1m])) > 0  # Monitor the rate of POST requests over 1 minute
+        for: 10s  # Alert if the condition holds for 1 minute
+        labels:
+          severity: warning
+        annotations:
+          summary: "High number of POST requests"
+          description: "More than 2 POST requests have been received in the last minute."
+

@@ -1,0 +1,28 @@
+mac@MacBookPro alertmanager-0.27.0.darwin-amd64 % cat alertmanager.yml
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: 'Mail Alert'
+  repeat_interval: 30s
+  group_wait: 15s
+  group_interval: 15s
+
+receivers:
+  - name: 'Mail Alert'
+    email_configs:
+      - smarthost: 'sandbox.smtp.mailtrap.io:2525'
+        auth_username: env('auth_username')
+        auth_password: env('auth_password')
+        from: env('from')
+        to: env('to')
+        headers:
+          subject: 'Prometheus Mail Alerts'
+        send_resolved: true  # Optional: send notifications when resolved
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
