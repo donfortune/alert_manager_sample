@@ -21,3 +21,25 @@ groups:
           summary: "High number of POST requests"
           description: "More than 2 POST requests have been received in the last minute."
 
+  - name: apache_status
+    rules:
+      - alert: ApacheDown
+        expr: apache_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Apache server is down"
+          description: "The Apache server is not responding to requests."
+
+  - name: nginx_status
+    rules:
+      - alert: NginxDown
+        expr: nginx_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Nginx server is down"
+          description: "The Nginx server is not responding to requests."
+
