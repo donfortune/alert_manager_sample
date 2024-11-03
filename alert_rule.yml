@@ -36,7 +36,7 @@ groups:
     rules:
       - alert: NginxDown
         expr: nginx_up == 0
-        for: 1m
+        for: 40s
         labels:
           severity: critical
         annotations:
