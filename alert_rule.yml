@@ -14,7 +14,7 @@ groups:
     rules:
       - alert: HighPostRequestRate
         expr: sum(rate(post_request_total[1m])) > 0  # Monitor the rate of POST requests over 1 minute
-        for: 10s  # Alert if the condition holds for 1 minute
+        for: 10s
         labels:
           severity: warning
         annotations:
