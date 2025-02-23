@@ -2,7 +2,7 @@ groups:
   - name: example_alerts
     rules:
       - alert: HighRequestRate
-        expr: sum(rate(http_requests_total[5m])) > 100
+        expr: sum(rate(http_requests_total[3m])) > 100
         for: 5m
         labels:
           severity: warning
