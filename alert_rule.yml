@@ -1,5 +1,5 @@
 groups:
-  - name: example_alerts
+  - name: example_alert
     rules:
       - alert: HighRequestRate
         expr: sum(rate(http_requests_total[3m])) > 100
